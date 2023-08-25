@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste de naissance</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        .logo, footer {
+            text-align: center;
+        }
+        hr {
+            margin-bottom: 2em;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .btn {
+            background-color: #fff;
+            padding: .5em;
+        }
+
+        .Urgent {
+            background-color: red;
+        }
+
+        .Faible {
+            background-color: green;
+        }
+
+        .Normal {
+            background-color: rgb(10, 189, 243);
+        }
+        .Urgent,
+        .Faible,
+        .Normal {
+            color: #fff;
+            text-align: center;
+            border-radius: 2em;
+            font-weight: bold;
+        }
+        button {
+            width: inherit;
+        }
+        .message {
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 0.5rem;
+            padding: 015em;
+            margin: auto;
+            width: 50%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+   
+       
+      
+
+        <div class="img">
+            <h1>« Liste de naissance »</h1>
+            <img src="https://images.unsplash.com/photo-1511948374796-056e8f289f34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="...">
+        </div>
+      
+        
+
+
+     <br>
+   
+        <div class="container">
+            <form action="/articles/create" method="POST">
+                <div class="grid">
+                    <label for="firstname">
+                        <input type="text" id="title" name="title" placeholder="Titre de la tâche" required>
+                    </label>
+                    <select id="status" name="status" required>
+                        <option value="" selected>Selectionnez un statut</option>
+                        <option value="Acheté">Acheté</option>
+                        <option value="Disponible">Disponible</option>
+                        <option value="Commandé">Commandé</option>
+                    </select>
+                </div>
+                <label for="marque">Marque de l'article souhaité</label>
+                <input type="text" id="marque" name="marque" placeholder="Marque de l'articles." required>
+                <button type="submit">Enregistrer</button>
+            </form>
+        </div>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Titre</th>
+                    <th scope="col">marque</th>
+                    <th scope="col">Statut</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%if(articles.length){%>
+                    <% articles.forEach(function(article){ %>
+                        <tr>
+                            <td>
+                                <%=article.title %>
+                            </td>
+                            <td>
+                                <%=article.marque %>
+                            </td>
+                            <td>
+                                <p class="<%= article.status %>">
+                                    <%=article.status %>
+                                </p>
+                            </td>
+                            <td class="actions">
+                                <a class="btn" href="/articles/delete/<%= article.id %>">
+                                    <img src="https://api.iconify.design/ic:baseline-delete-forever.svg"
+                                        alt="Supprimer">
+                                </a>
+                            </td>
+                        </td>
+                        <td class="action">
+                            <a class="btn" href="/articles/descriptions/<%= article.id %>">
+                                <img src="https://api.iconify.design/ic:baseline-remove-red-eye.svg?color=%23888888"
+                                    alt="Voir">
+                            </a>
+                        </td>
+                        </tr>
+                        <% }) %>
+                            <% }else{ %>
+                                <tr>
+                                    <td colspan="3">articles</td>
+                                </tr>
+                                <% } %>
+            </tbody>
+        </table>
+   
+        <footer>
+            <p>Cours de NodeJS - <a href="https://www.agiliteach.org">Agiliteach</a></p>
+        </footer>
+    </div>
+</body>
+
+</html>
